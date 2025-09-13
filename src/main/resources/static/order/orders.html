@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sifarişlər</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Müştəri</th>
+                <th>Əlaqə nömrəsi</th>
+                <th>Əşya</th>
+                <th>Qeyd</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        fetch("http://localhost:8080/api/order")
+            .then(r => r.json())
+            .then(data => {
+                let tbody = document.querySelector("tbody");
+                tbody.innerHTML = data
+                    .map(order => `<tr>
+                                <td>${order.id}</td>
+                                <td>${order.clientName}</td>
+                                <td>${order.clientContact}</td>
+                                <td>${order.thingName}</td>
+                                <td>${order.note}</td>
+                                <td>${order.status}</td>
+                            </tr>`
+                    )
+                    .join("");
+            })
+    </script>
+</body>
+
+</html>
