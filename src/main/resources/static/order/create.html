@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sifariş yarat</title>
+</head>
+
+<body>
+    <form id="orderForm">
+        <label>Müştərinin adı: <input type="text" name="clientName" required /></label><br />
+        <label>Əlaqə nömrəsi: <input type="text" name="clientContact" required /></label><br />
+        <label>Əşya: <input type="text" name="thingName" /></label><br />
+        <label>Qeyd: <input type="text" name="note" /></label><br />
+        <label>Status: <select name="status" id="status">
+            <option value=null>--</option>
+            </select><br />
+            <button type="submit">Send</button>
+    </form>
+    <script>
+        const host = 'localhost';
+        const port = '8080';
+
+        let select = document.querySelector("select");
+        fetch(`http://${host}:${port}/api/order/statuses`)
+            .then(r => r.json())
+            .then(d => select.innerHTML += d
+                .map(status => `<option value="${status}">${status}</option>`)
+                .join(""));
+
+        let form = document.getElementById("orderForm");
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = {
+                clientName: formData.get("clientName"),
+                clientContact: formData.get("clientContact"),
+                thingName: formData.get("thingName") || null,
+                note: formData.get("note"),
+                status: formData.get("status"),
+            };
+
+            fetch("http://localhost:8080/api/order", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+        })
+    </script>
+</body>
+
+</html>
