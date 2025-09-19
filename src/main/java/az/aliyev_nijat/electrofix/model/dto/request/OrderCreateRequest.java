@@ -2,6 +2,7 @@ package az.aliyev_nijat.electrofix.model.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,4 +26,11 @@ public class OrderCreateRequest {
     @Pattern(regexp = "^(?! )(?!.* {2})(?!.* $).+$", message = "{orderCreateRequest.status.pattern}")
     @NotNull(message = "{orderCreateRequest.status.notNull}")
     private String status;
+
+    @PositiveOrZero(message = "{orderCreateRequest.totalAmount.positiveOrZero}")
+    private Double totalAmount;
+
+    @NotNull(message = "{orderCreateRequest.payedAmount.notNull}")
+    @PositiveOrZero(message = "{orderCreateRequest.payedAmount.positiveOrZero}")
+    private Double paidAmount;
 }

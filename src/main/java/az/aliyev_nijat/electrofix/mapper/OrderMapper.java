@@ -17,6 +17,8 @@ public class OrderMapper {
                 .thingName(source.getThingName())
                 .note(source.getNote())
                 .status(status)
+                .totalAmount(source.getTotalAmount())
+                .paidAmount(source.getPaidAmount())
                 .build();
     }
 
@@ -29,6 +31,8 @@ public class OrderMapper {
                 .thingName(source.getThingName())
                 .note(source.getNote())
                 .status(source.getStatus().getStatus())
+                .totalAmount(source.getTotalAmount())
+                .payedAmount(source.getPaidAmount())
                 .build();
     }
 }
