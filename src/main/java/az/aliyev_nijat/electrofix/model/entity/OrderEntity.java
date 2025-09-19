@@ -29,4 +29,6 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "status_id")
     private OrderStatusEntity status;
+    private Double totalAmount;
+    private Double paidAmount;
 }

@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Builder
-@Setter
 @Getter
+@Setter
 public class OrderResponse {
 
     private Long id;
@@ -15,4 +15,6 @@ public class OrderResponse {
     private String thingName;
     private String note;
     private String status;
+    private Double totalAmount;
+    private Double payedAmount;
 }
